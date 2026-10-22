@@ -47,6 +47,76 @@ input() ফাংশন এই 30-কে প্রথমে স্ট্রি�
 
 
 
+ইউজার রোল বা পারমিশন চেক করা (Access Control / Authorization)
+ব্যাকএন্ড সার্ভারে কোনো ইউজারের ড্যাশবোর্ডে প্রবেশের অনুমতি আছে কি না, তা চেক করার জন্য এই লজিক ব্যবহার করা হয়। 
+যেমন, ইউজারটি অ্যাডমিন বা মডারেটর কি না তা যাচাই করা:
+
+
+
+# সিস্টেমের অনুমোদিত রোলগুলোর একটি লিস্ট
+allowed_roles = ["admin", "moderator"]
+
+# ইউজারের বর্তমান রোল
+user_role = "user"
+
+# ইউজার রোলটি অনুমোদিত লিস্টে আছে কি না তা চেক করা হচ্ছে
+if user_role in allowed_roles:
+    print("Access granted to dashboard.")
+else:
+    print("Access denied. Admins only.")
+
+
+
+
+
+ব্ল্যাকলিস্ট বা হোয়াইটলিস্ট ভ্যালিডেশন (Security & Filtering)
+কোনো ইউজার রেজিস্ট্রেশন করার সময় তার ইমেল বা আইপি অ্যাড্রেসটি স্প্যাম লিস্টে (Blacklist) আছে কি না, তা চেক করতে এই মেকানিজম ব্যবহার করা হয়:
+
+
+# স্প্যাম বা নিষিদ্ধ ইমেলের লিস্ট
+blocked_emails = ["spam@mail.com", "fakeuser@mail.com", "bot@mail.com"]
+
+# নতুন রেজিস্টার করতে চাওয়া ইমেল
+incoming_email = "spam@mail.com"
+
+# ইমেলটি ব্ল্যাকলিস্টে আছে কি না চেক করা হচ্ছে
+if incoming_email in blocked_emails:
+    print("Registration blocked. This email is blacklisted.")
+else:
+    print("Registration successful.")
+
+
+
+
+ক্যাটাগরি বা অপশন ভ্যালিডেশন (Input Validation)
+ব্যাকএন্ডে ইউজারের কাছ থেকে ডেটা গ্রহণ করার সময় সেটি সঠিক ক্যাটাগরির মধ্যে পড়ে কি না, তা যাচাই করা জরুরি:
+
+# শপিং সাইটের বৈধ পেমেন্ট মেথডগুলোর লিস্ট
+valid_payment_methods = ["bkash", "nagad", "card", "cod"]
+
+# ইউজার যে পেমেন্ট মেথড সিলেক্ট করেছে
+user_selection = "bkash"
+
+if user_selection in valid_payment_methods:
+    print("Payment method accepted. Proceeding to checkout...")
+else:
+    print("Invalid payment method selected.")
+
+
+
+নিরাপত্তা ও ফিল্টারিং: ব্যবহারকারীর দেওয়া ইনপুট আমাদের সিস্টেমে নিরাপদ বা গ্রহণযোগ্য কি না, তা খুব দ্রুত যাচাই করতে এই ইন-অপারেটর (in) দারুণভাবে কাজ করে।
+
+কোড ক্লিন রাখা: বড় বড় শর্ত লেখার বদলে পাইথনের এই সহজ সিনট্যাক্স দিয়ে এক লাইনেই অনেক বড় লজিক সমাধান করে ফেলা যায়।
+
+
+
+
+
+
+
+
+
+
 
 সংখ্যাটি লিস্টের কত নম্বর পজিশনে (Index) আছে তা দেখানো
 সংখ্যাটি লিস্টে পাওয়ার পর সেটি কত নম্বর ইনডেক্সে বা পজিশনে আছে, তা বের করতে  index() মেথড ব্যবহার:
